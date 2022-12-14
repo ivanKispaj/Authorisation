@@ -59,21 +59,25 @@ public struct Authorisation: View {
                     }
             } else {
                 
-                CodeAuthentificate(biometryType: self.biometryAuthType, verifyCode: self.code, isSuccesCode: $isSaccesCode, isBiometricAuth: isBiometricAuth)
-                    .onAppear {
-                        if isSaccesCode {
+                if !isSaccesCode {
+                    CodeAuthentificate(biometryType: self.biometryAuthType, verifyCode: self.code, isSuccesCode: $isSaccesCode, isBiometricAuth: isBiometricAuth)
+                        
+                } else {
+                    GreetingМiew()
+                        .onAppear {
                             self.isLoggined = true
                         }
-                    }
             }
+            
         }
-        
     }
     
-    
-    public init(isLoggined: Binding<Bool>) {
-        let device = DeviceAuthentificate()
-        self.biometryAuthType = device.getAuthType()
-        self._isLoggined = isLoggined
-    }
+}
+
+
+public init(isLoggined: Binding<Bool>) {
+    let device = DeviceAuthentificate()
+    self.biometryAuthType = device.getAuthType()
+    self._isLoggined = isLoggined
+}
 }
