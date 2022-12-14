@@ -9,9 +9,10 @@ import Foundation
 import LocalAuthentication
 
 
-final class DeviceAuthentificate {
+public final class DeviceAuthentificate {
     
-    internal func getAuthType() -> BiometricType {
+    @available(iOS 13.0.0, *)
+    public  func getAuthType() async -> BiometricType {
         var error: NSError?
         let context = LAContext()
         guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
@@ -37,7 +38,7 @@ final class DeviceAuthentificate {
     }
     
     @available(iOS 13.0.0, *)
-    func authentificate(_ completion: @escaping(Bool)-> ()) async {
+   public func authentificate(_ completion: @escaping(Bool)-> ()) async {
         let context = LAContext()
         var error: NSError?
         

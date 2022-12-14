@@ -19,10 +19,7 @@ public struct Authorisation: View {
     // Использовать или нет биометрию для входа
     @AppStorage("isBiometricAuth") private(set) var isBiometricAuth = false
     // Тип биометрической авторизации поддержывающее кустройством
-    var biometryAuthType: BiometricType = {
-        let device = DeviceAuthentificate()
-        return device.getAuthType()
-    }()
+    var biometryAuthType: BiometricType = .none
     // Если входим впервые!!
     @State private var firstInput: Bool = false
     @State private(set) var isSaccesCode: Bool = false
@@ -74,7 +71,9 @@ public struct Authorisation: View {
     }
     
     
-    public init(isLoggined: Binding<Bool>) {
+    public init(isLoggined: Binding<Bool>) async {
+        let device = DeviceAuthentificate()
+       await self.biometryAuthType = device.getAuthType()
         self._isLoggined = isLoggined
     }
 }
