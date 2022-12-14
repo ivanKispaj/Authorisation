@@ -15,11 +15,14 @@ public struct Authorisation: View {
     @Binding var isLoggined: Bool // При изменении выйдет из пакета и перейдет дальше
     @AppStorage("token") private(set) var token = ""
     @AppStorage("userId") private(set) var userId: String = ""
-    @AppStorage("code") private(set) var code = ""
+    @AppStorage("authCode") private(set) var code = ""
     // Использовать или нет биометрию для входа
     @AppStorage("isBiometricAuth") private(set) var isBiometricAuth = false
     // Тип биометрической авторизации поддержывающее кустройством
-    @State private(set) var biometryAuthType: BiometricType = DeviceAuthentificate().getAuthType()
+    var biometryAuthType: BiometricType = {
+        let device = DeviceAuthentificate()
+        return device.getAuthType()
+    }()
     // Если входим впервые!!
     @State private var firstInput: Bool = false
     @State private(set) var isSaccesCode: Bool = false
