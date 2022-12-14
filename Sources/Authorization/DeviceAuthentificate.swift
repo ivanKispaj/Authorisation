@@ -12,7 +12,7 @@ import LocalAuthentication
 public final class DeviceAuthentificate {
     
     @available(iOS 13.0.0, *)
-    public  func getAuthType() async -> BiometricType {
+    public  func getAuthType() -> BiometricType {
         var error: NSError?
         let context = LAContext()
         guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
@@ -22,8 +22,7 @@ public final class DeviceAuthentificate {
             }
             return .none
         }
-        
-        if #available(iOS 11.0, *) {
+     
             switch context.biometryType {
             case .touchID:
                 return .touchID
@@ -32,9 +31,7 @@ public final class DeviceAuthentificate {
             default:
                 return .none
             }
-        }
-        
-        return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) ? .touchID : .none
+
     }
     
     @available(iOS 13.0.0, *)

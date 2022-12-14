@@ -71,9 +71,9 @@ public struct Authorisation: View {
     }
     
     
-    public init(isLoggined: Binding<Bool>) async {
+    public init(isLoggined: Binding<Bool>) {
         let device = DeviceAuthentificate()
-       await self.biometryAuthType = device.getAuthType()
+        self.biometryAuthType = device.getAuthType()
         self._isLoggined = isLoggined
     }
 }
