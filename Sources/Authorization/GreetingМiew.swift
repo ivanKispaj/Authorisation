@@ -9,7 +9,7 @@ import SwiftUI
 import LoadService
 @available(iOS 13.0, *)
 
-final class GreetingМiew : View {
+struct GreetingМiew : View {
     
     var body: some View {
         ZStack {
