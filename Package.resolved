@@ -1,0 +1,50 @@
+{
+  "pins" : [
+    {
+      "identity" : "loadservice",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ivanKispaj/LoadService.git",
+      "state" : {
+        "revision" : "6f5bc82aa7b7de66a54c9ed3df76e1df55f5a45d",
+        "version" : "1.0.4"
+      }
+    },
+    {
+      "identity" : "realm-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-core.git",
+      "state" : {
+        "revision" : "b77443ca7fa25407869ca537bf3ae912b1427bff",
+        "version" : "12.13.0"
+      }
+    },
+    {
+      "identity" : "realm-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-swift.git",
+      "state" : {
+        "revision" : "b442ee3e9caa1abab26fd9b23f060f6f0815ff48",
+        "version" : "10.33.0"
+      }
+    },
+    {
+      "identity" : "vkapimethods",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ivanKispaj/VKApiMethods.git",
+      "state" : {
+        "revision" : "9a534ae2fe2ebb3adce480f3f9a30e57541a3177",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "vkdatamodel",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ivanKispaj/VKDataModel.git",
+      "state" : {
+        "revision" : "dea89061cd1bf4fd4d080c9bcea12addb3e931fb",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 2
+}
