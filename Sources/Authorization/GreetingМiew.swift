@@ -13,7 +13,7 @@ struct GreetingМiew : View {
     
     var body: some View {
         ZStack {
-            
+            Text("Lpaded UsderData")
         }
     }
 }

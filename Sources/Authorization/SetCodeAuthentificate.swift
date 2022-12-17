@@ -99,6 +99,7 @@ struct SetCodeAuthentificate: View {
                             self.code = String(newValue.prefix(4))
                             UserDefaults.standard.set(self.code.encodeBase64(), forKey: "authCode")
                             UserDefaults.standard.set(self.checked, forKey: "isBiometricAuth")
+                            UserDefaults.standard.set(self.biometryType.rawValue, forKey: "biometricType")
                             
                         }
                     }

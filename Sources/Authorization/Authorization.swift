@@ -16,6 +16,7 @@ public struct Authorisation: View {
     @AppStorage("token") private(set) var token = ""
     @AppStorage("userId") private(set) var userId: String = ""
     @AppStorage("authCode") private(set) var code = ""
+    @AppStorage("userName") private(set) var userName = ""
     // Использовать или нет биометрию для входа
     @AppStorage("isBiometricAuth") private(set) var isBiometricAuth = false
     // Тип биометрической авторизации поддержывающее кустройством
@@ -48,15 +49,14 @@ public struct Authorisation: View {
         } else {
             
             // Если мы впервые входим в приложение то
-            if self.firstInput {
+            if userName.isEmpty {
                 GreetingМiew()
+                    .onAppear {
+                        isSaccesCode = true
+                    }
                     .task {
                         await self.viewModel?.loadAccountData()
-                        self.isLoggined = true
-                        // loadProfile
-                        // load Friends in to DB
-                        //self.isloggined = true
-                        // Прописать UserDefaults данные
+
                     }
             } else {
                 
