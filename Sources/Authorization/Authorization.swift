@@ -63,12 +63,15 @@ public struct Authorisation: View {
                     GreetingМiew()
                         .task {
                            await self.viewModel.authService.authentificate { result in
+                               if result {
+                                   self.isLoggined = true
+                               }
                                 isBiometricAuth = result
                             }
                         }
                 } else {
                     if !isSaccesCode {
-                        CodeAuthentificate(biometryType: self.biometryAuthType, verifyCode: self.code, isSuccesCode: $isSaccesCode, isBiometricAuth: isBiometricAuth)
+                        CodeAuthentificate(biometryType: self.biometryAuthType, verifyCode: self.code, isSuccesCode: $isSaccesCode, isBiometricAuth: $isBiometricAuth)
                         
                     } else {
                         GreetingМiew()

@@ -19,7 +19,7 @@ struct CodeAuthentificate: View {
     @State private(set) var biometryType: BiometricType
     @State private(set) var verifyCode: String
     @Binding private(set) var isSuccesCode: Bool
-    @State private(set) var isBiometricAuth: Bool
+    @Binding private(set) var isBiometricAuth: Bool
     
     var body: some View {
         // CODE AUTHORIZATION
@@ -90,6 +90,33 @@ struct CodeAuthentificate: View {
                 }
             }
             
+            VStack {
+                if self.isBiometricAuth  {
+                    switch self.biometryType {
+                        
+                    case .faceID:
+                        Image(systemName: "faceid")
+                            .resizable()
+                            .frame(width: 40,height: 40)
+                            .onTapGesture {
+                                if self.isBiometricAuth {
+                                    self.biometric = true
+                                }
+                            }
+                            .padding(.top, 20)
+                    default:
+                        Image(systemName: "touchid")
+                            .resizable()
+                            .frame(width: 40,height: 40)
+                            .onTapGesture {
+                                if self.isBiometricAuth {
+                                    self.biometric = true
+                                }
+                            }
+                            .padding(.top, 20)
+                    }
+                }
+            }
         }
         .onAppear {
             isFocused = true
@@ -109,33 +136,7 @@ struct CodeAuthentificate: View {
         .shadow(color: Color.blue, radius: 5, x: 8, y: 8)
         
         //MARK: View для отображене кнопки вызова faceId or TouchId
-        VStack {
-            if self.isBiometricAuth  {
-                switch self.biometryType {
-                    
-                case .faceID:
-                    Image(systemName: "faceid")
-                        .resizable()
-                        .frame(width: 40,height: 40)
-                        .onTapGesture {
-                            if self.isBiometricAuth {
-                                self.biometric = true
-                            }
-                        }
-                        .padding(.top, 20)
-                default:
-                    Image(systemName: "touchid")
-                        .resizable()
-                        .frame(width: 40,height: 40)
-                        .onTapGesture {
-                            if self.isBiometricAuth {
-                                self.biometric = true
-                            }
-                        }
-                        .padding(.top, 20)
-                }
-            }
-        }
+
         
         
         
@@ -165,10 +166,10 @@ struct CodeAuthentificate: View {
             
         }
     }
-    init(biometryType: BiometricType, verifyCode: String, isSuccesCode: Binding<Bool>, isBiometricAuth: Bool) {
+    init(biometryType: BiometricType, verifyCode: String, isSuccesCode: Binding<Bool>, isBiometricAuth: Binding<Bool>) {
         self.biometryType = biometryType
         self.verifyCode = verifyCode
         self._isSuccesCode = isSuccesCode
-        self.isBiometricAuth = isBiometricAuth
+        self._isBiometricAuth = isBiometricAuth
     }
 }
