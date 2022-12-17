@@ -11,7 +11,7 @@ import SwiftUI
 
 @available(iOS 15.0, *)
 public struct Authorisation: View {
-    @State private var viewModel: FetchDataService?
+    @State private var viewModel: FetchDataService = FetchDataService()
     @Binding var isLoggined: Bool // При изменении выйдет из пакета и перейдет дальше
     @AppStorage("token") private(set) var token = ""
     @AppStorage("userId") private(set) var userId: String = ""
@@ -42,7 +42,6 @@ public struct Authorisation: View {
             // запишет код
             SetCodeAuthentificate(biometryType: self.biometryAuthType)
                 .onAppear {
-                    self.viewModel = FetchDataService(token: self.token, userId: self.userId)
                     self.firstInput = true
                 }
             
@@ -55,31 +54,41 @@ public struct Authorisation: View {
                         isSaccesCode = true
                     }
                     .task {
-                        await self.viewModel?.loadAccountData()
-
+                        await self.viewModel.loadAccountData()
                     }
+                
             } else {
                 
-                if !isSaccesCode {
-                    CodeAuthentificate(biometryType: self.biometryAuthType, verifyCode: self.code, isSuccesCode: $isSaccesCode, isBiometricAuth: isBiometricAuth)
-                        
-                } else {
+                if self.isBiometricAuth {
                     GreetingМiew()
-                        .onAppear {
-                            self.isLoggined = true
+                        .task {
+                           await self.viewModel.authService.authentificate { result in
+                                isBiometricAuth = result
+                            }
                         }
+                } else {
+                    if !isSaccesCode {
+                        CodeAuthentificate(biometryType: self.biometryAuthType, verifyCode: self.code, isSuccesCode: $isSaccesCode, isBiometricAuth: isBiometricAuth)
+                        
+                    } else {
+                        GreetingМiew()
+                            .onAppear {
+                                self.isLoggined = true
+                            }
+                    }
+                }
+              
+                
             }
-            
         }
+        
     }
     
-}
-
-
-public init(isLoggined: Binding<Bool>) {
-    let device = DeviceAuthentificate()
-    self.biometryAuthType = device.getAuthType()
-    UserDefaults.standard.set(self.biometryAuthType.rawValue, forKey: "biometricType")
-    self._isLoggined = isLoggined
-}
+    
+    public init(isLoggined: Binding<Bool>) {
+        let device = DeviceAuthentificate()
+        self.biometryAuthType = device.getAuthType()
+        UserDefaults.standard.set(self.biometryAuthType.rawValue, forKey: "biometricType")
+        self._isLoggined = isLoggined
+    }
 }

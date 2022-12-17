@@ -13,9 +13,11 @@ import SwiftUI
 
 @available(iOS 14.0, *)
 final class FetchDataService {
+    
     let service: LoadService
-    init (token: String, userId: String) {
-        
+    let authService: DeviceAuthentificate = DeviceAuthentificate()
+    
+    init () {
         let token = UserDefaults.standard.string(forKey: "token") ?? ""
         let userId = UserDefaults.standard.string(forKey: "userId") ?? ""
         self.service = LoadService(userId: userId, method: .getUserInfo(token: token, userId: userId))
