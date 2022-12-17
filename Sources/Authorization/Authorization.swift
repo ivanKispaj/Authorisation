@@ -1,10 +1,13 @@
 //
 //
+// Authorisation.swift
 //
+// Created by Ivan Konishchev on 14.12.2022.
 //
+// Package for user authorization
+// The minimum version of iOS is 15.0
 //
-//
-//
+// Writing documentation in active development!
 //
 
 import SwiftUI
@@ -30,17 +33,17 @@ public struct Authorisation: View {
     public var body: some View {
         
         if token.isEmpty {
-            // Если токен отсутствует то получение токена
-            // после полуычения токена VKloginScene в UserDefaults (key: "token")
-            // запишет токен и View перестроится!
+            // If there is no token, then receiving the token,
+            // after receiving the token, VKloginScene in UserDefaults (key: "token")
+            // will write the token and the View will rebuild!
             VKLoginScene()
                 .onAppear {
                     self.firstInput = true
                 }
         } else if code.isEmpty {
-            // Если код отсутствует то создаем код
-            // После создания кода, SetCodeAuthentificate в UserDefaults (key: "authCode")
-            // запишет код
+            // If the code is missing, then create the code
+            // After creating the code, SetCodeAuthentificate in UserDefaults (key: "AuthCode")
+            // will write down the code
             SetCodeAuthentificate(biometryType: self.biometryAuthType)
                 .onAppear {
                     self.viewModel = FetchDataService()
@@ -49,7 +52,7 @@ public struct Authorisation: View {
             
         } else {
             
-            // Если мы впервые входим в приложение то
+            // If we are entering the application for the first time then
             if userName.isEmpty {
                 GreetingМiew()
                     .onAppear {
