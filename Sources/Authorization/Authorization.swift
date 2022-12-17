@@ -21,6 +21,7 @@ public struct Authorisation: View {
     // Тип биометрической авторизации поддержывающее кустройством
     var biometryAuthType: BiometricType = .none
     // Если входим впервые!!
+    
     @State private var firstInput: Bool = false
     @State private(set) var isSaccesCode: Bool = false
     
@@ -78,6 +79,7 @@ public struct Authorisation: View {
 public init(isLoggined: Binding<Bool>) {
     let device = DeviceAuthentificate()
     self.biometryAuthType = device.getAuthType()
+    UserDefaults.standard.set(self.biometryAuthType.rawValue, forKey: "biometricType")
     self._isLoggined = isLoggined
 }
 }
