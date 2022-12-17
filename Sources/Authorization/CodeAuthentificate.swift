@@ -90,33 +90,7 @@ struct CodeAuthentificate: View {
                 }
             }
 
-            VStack {
-                if self.isBiometricAuth  {
-                    switch self.biometryType {
-
-                    case .faceID:
-                        Image(systemName: "faceid")
-                            .resizable()
-                            .frame(width: 40,height: 40)
-                            .onTapGesture {
-                                if self.isBiometricAuth {
-                                    self.isCancelBiometric = false
-                                }
-                            }
-                            .padding(.top, 20)
-                    default:
-                        Image(systemName: "touchid")
-                            .resizable()
-                            .frame(width: 40,height: 40)
-                            .onTapGesture {
-                                if self.isBiometricAuth {
-                                    self.isCancelBiometric = false
-                                }
-                            }
-                            .padding(.top, 20)
-                    }
-                }
-            }
+      
         }
         .onAppear {
             isFocused = true
@@ -137,7 +111,33 @@ struct CodeAuthentificate: View {
         
         //MARK: View для отображене кнопки вызова faceId or TouchId
 
-        
+        VStack {
+            if self.isBiometricAuth  {
+                switch self.biometryType {
+
+                case .faceID:
+                    Image(systemName: "faceid")
+                        .resizable()
+                        .frame(width: 40,height: 40)
+                        .onTapGesture {
+                            if self.isBiometricAuth {
+                                self.isCancelBiometric = false
+                            }
+                        }
+                        .padding(.top, 20)
+                default:
+                    Image(systemName: "touchid")
+                        .resizable()
+                        .frame(width: 40,height: 40)
+                        .onTapGesture {
+                            if self.isBiometricAuth {
+                                self.isCancelBiometric = false
+                            }
+                        }
+                        .padding(.top, 20)
+                }
+            }
+        }
         
         
     }
