@@ -88,6 +88,38 @@ struct CodeAuthentificate: View {
                         
                     }
                 }
+                //MARK: View для отображене кнопки вызова faceId or TouchId
+                Divider()
+                    .background(Color.white)
+                    .padding(.top, 10)
+                    .padding(.bottom, 10)
+                VStack {
+                    if self.isBiometricAuth  {
+                        switch self.biometryType {
+                            
+                        case .faceID:
+                            Image(systemName: "faceid")
+                                .resizable()
+                                .frame(width: 40,height: 40)
+                                .onTapGesture {
+                                    if self.isBiometricAuth {
+                                        self.isCancelBiometric = false
+                                    }
+                                }
+                                .padding(.top, 20)
+                        default:
+                            Image(systemName: "touchid")
+                                .resizable()
+                                .frame(width: 40,height: 40)
+                                .onTapGesture {
+                                    if self.isBiometricAuth {
+                                        self.isCancelBiometric = false
+                                    }
+                                }
+                                .padding(.top, 20)
+                        }
+                    }
+                }
             }
             
         }
@@ -107,38 +139,7 @@ struct CodeAuthentificate: View {
         .shadow(color: Color.gray, radius: 5, x: -8, y: -8)
         .shadow(color: Color.blue, radius: 5, x: 8, y: 8)
         
-        //MARK: View для отображене кнопки вызова faceId or TouchId
-        Divider()
-            .background(Color.white)
-            .padding(.top, 10)
-            .padding(.bottom, 10)
-        VStack {
-            if self.isBiometricAuth  {
-                switch self.biometryType {
-                    
-                case .faceID:
-                    Image(systemName: "faceid")
-                        .resizable()
-                        .frame(width: 40,height: 40)
-                        .onTapGesture {
-                            if self.isBiometricAuth {
-                                self.isCancelBiometric = false
-                            }
-                        }
-                        .padding(.top, 20)
-                default:
-                    Image(systemName: "touchid")
-                        .resizable()
-                        .frame(width: 40,height: 40)
-                        .onTapGesture {
-                            if self.isBiometricAuth {
-                                self.isCancelBiometric = false
-                            }
-                        }
-                        .padding(.top, 20)
-                }
-            }
-        }
+   
         
         
     }
