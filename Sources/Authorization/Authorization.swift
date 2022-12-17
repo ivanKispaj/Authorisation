@@ -71,7 +71,7 @@ public struct Authorisation: View {
                             }
                         }
                 } else {
-                    if !isSaccesCode && isCancelBiometric {
+                    if !isSaccesCode {
                         CodeAuthentificate(biometryType: self.biometryAuthType, verifyCode: self.code, isSuccesCode: $isSaccesCode, isBiometricAuth: $isBiometricAuth, isCancelBiopmetric: $isCancelBiometric)
                         
                     } else {
