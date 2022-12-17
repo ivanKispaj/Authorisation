@@ -91,8 +91,7 @@ struct CodeAuthentificate: View {
                 //MARK: View для отображене кнопки вызова faceId or TouchId
                 Divider()
                     .background(Color.white)
-                    .padding(.top, 10)
-                    .padding(.bottom, 10)
+
                 VStack {
                     if self.isBiometricAuth  {
                         switch self.biometryType {
@@ -100,23 +99,23 @@ struct CodeAuthentificate: View {
                         case .faceID:
                             Image(systemName: "faceid")
                                 .resizable()
-                                .frame(width: 40,height: 40)
+                                .frame(width: 50,height: 50)
                                 .onTapGesture {
                                     if self.isBiometricAuth {
                                         self.isCancelBiometric = false
                                     }
                                 }
-                                .padding(.top, 20)
+                                .padding(.top, 10)
                         default:
                             Image(systemName: "touchid")
                                 .resizable()
-                                .frame(width: 40,height: 40)
+                                .frame(width: 50,height: 50)
                                 .onTapGesture {
                                     if self.isBiometricAuth {
                                         self.isCancelBiometric = false
                                     }
                                 }
-                                .padding(.top, 20)
+                                .padding(.top, 10)
                         }
                     }
                 }
