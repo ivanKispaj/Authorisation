@@ -17,7 +17,7 @@ public struct Authorisation: View {
     @AppStorage("userId") private(set) var userId: String = ""
     @AppStorage("authCode") private(set) var code = ""
     @AppStorage("userName") private(set) var userName = ""
-    @State var errorBiometry = false
+    @State var isCancelBiometric = false
     // Использовать или нет биометрию для входа
     @AppStorage("isBiometricAuth") private(set) var isBiometricAuth = false
     // Тип биометрической авторизации поддержывающее кустройством
@@ -60,19 +60,19 @@ public struct Authorisation: View {
                 
             } else {
                 
-                if self.isBiometricAuth && !errorBiometry {
+                if self.isBiometricAuth && !isCancelBiometric {
                     GreetingМiew()
                         .task {
                            await self.viewModel.authService.authentificate { result in
                                if result {
                                    self.isLoggined = true
                                }
-                                errorBiometry = result
+                                isCancelBiometric = true
                             }
                         }
                 } else {
-                    if !isSaccesCode && errorBiometry {
-                        CodeAuthentificate(biometryType: self.biometryAuthType, verifyCode: self.code, isSuccesCode: $isSaccesCode, isBiometricAuth: $isBiometricAuth)
+                    if !isSaccesCode && isCancelBiometric {
+                        CodeAuthentificate(biometryType: self.biometryAuthType, verifyCode: self.code, isSuccesCode: $isSaccesCode, isBiometricAuth: $isBiometricAuth, isCancelBiopmetric: $isCancelBiometric)
                         
                     } else {
                         GreetingМiew()

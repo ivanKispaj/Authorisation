@@ -14,7 +14,7 @@ struct CodeAuthentificate: View {
     @State private var code: String = ""
     @State var isWrong: Bool = false
     @FocusState private var isFocused: Bool
-    @State var biometric: Bool = false
+    @Binding var isCancelBiometric: Bool
     @State private var colorBlock = Color.white
     @State private(set) var biometryType: BiometricType
     @State private(set) var verifyCode: String
@@ -100,7 +100,7 @@ struct CodeAuthentificate: View {
                             .frame(width: 40,height: 40)
                             .onTapGesture {
                                 if self.isBiometricAuth {
-                                    self.biometric = true
+                                    self.isCancelBiometric = false
                                 }
                             }
                             .padding(.top, 20)
@@ -110,7 +110,7 @@ struct CodeAuthentificate: View {
                             .frame(width: 40,height: 40)
                             .onTapGesture {
                                 if self.isBiometricAuth {
-                                    self.biometric = true
+                                    self.isCancelBiometric = false
                                 }
                             }
                             .padding(.top, 20)
@@ -166,10 +166,11 @@ struct CodeAuthentificate: View {
             
         }
     }
-    init(biometryType: BiometricType, verifyCode: String, isSuccesCode: Binding<Bool>, isBiometricAuth: Binding<Bool>) {
+    init(biometryType: BiometricType, verifyCode: String, isSuccesCode: Binding<Bool>, isBiometricAuth: Binding<Bool>, isCancelBiopmetric: Binding<Bool>) {
         self.biometryType = biometryType
         self.verifyCode = verifyCode
         self._isSuccesCode = isSuccesCode
         self._isBiometricAuth = isBiometricAuth
+        self._isCancelBiometric = isCancelBiopmetric
     }
 }
