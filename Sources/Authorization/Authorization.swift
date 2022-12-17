@@ -43,6 +43,7 @@ public struct Authorisation: View {
             // запишет код
             SetCodeAuthentificate(biometryType: self.biometryAuthType)
                 .onAppear {
+                    self.viewModel = FetchDataService()
                     self.firstInput = true
                 }
             
