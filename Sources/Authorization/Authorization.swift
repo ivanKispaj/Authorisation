@@ -17,6 +17,7 @@ public struct Authorisation: View {
     @AppStorage("userId") private(set) var userId: String = ""
     @AppStorage("authCode") private(set) var code = ""
     @AppStorage("userName") private(set) var userName = ""
+    @State var errorBiometry = false
     // Использовать или нет биометрию для входа
     @AppStorage("isBiometricAuth") private(set) var isBiometricAuth = false
     // Тип биометрической авторизации поддержывающее кустройством
@@ -59,18 +60,18 @@ public struct Authorisation: View {
                 
             } else {
                 
-                if self.isBiometricAuth {
+                if self.isBiometricAuth && !errorBiometry {
                     GreetingМiew()
                         .task {
                            await self.viewModel.authService.authentificate { result in
                                if result {
                                    self.isLoggined = true
                                }
-                                isBiometricAuth = result
+                                errorBiometry = result
                             }
                         }
                 } else {
-                    if !isSaccesCode {
+                    if !isSaccesCode && errorBiometry {
                         CodeAuthentificate(biometryType: self.biometryAuthType, verifyCode: self.code, isSuccesCode: $isSaccesCode, isBiometricAuth: $isBiometricAuth)
                         
                     } else {

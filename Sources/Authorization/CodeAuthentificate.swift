@@ -89,11 +89,11 @@ struct CodeAuthentificate: View {
                     }
                 }
             }
-            
+
             VStack {
                 if self.isBiometricAuth  {
                     switch self.biometryType {
-                        
+
                     case .faceID:
                         Image(systemName: "faceid")
                             .resizable()
